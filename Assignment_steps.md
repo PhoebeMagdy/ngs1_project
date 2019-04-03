@@ -12,7 +12,7 @@
 ## 4. Add SRAtoolkit to the PATH:
 ```PATH=$PATH: /home/ngs-01/Downloads/sratoolkit.2.9.6-ubuntu64/bin```
 
-5. Convert *.SRA file to FASTQ file using fastq-dump:
+## 5. Convert *.SRA file to FASTQ file using fastq-dump:
 ```fastq-dump SRR8797509.sra```
 
 
