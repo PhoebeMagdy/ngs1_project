@@ -15,8 +15,11 @@
 ## 5. Convert *.SRA file to FASTQ file using fastq-dump:
 ```fastq-dump SRR8797509.sra```
 
-## counting number of sequences in the fastq file 
+## 6-counting number of sequences in the fastq file 
 ```grep '@' SRR8797509.fastq | wc -l```
+
+## 7- take the first 5 million reads in sample 1 
+cat SRR8797509.fastq | sort | uniq | paste - - - - | awk 'NR>=1 && NR<=5000000' > sample1
 
 
 
