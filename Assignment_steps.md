@@ -20,9 +20,13 @@
 
 ## 7- separating each million in a separate file  
 ```cat SRR8797509.fastq | paste - - - - | awk 'NR>=1 && NR<=1000000' > sample1-1```
+
 ```cat SRR8797509.fastq | paste - - - - | awk 'NR>=1000001 && NR<=2000000' > sample2-1```
+
 ```cat SRR8797509.fastq | paste - - - - | awk 'NR>=2000001 && NR<=3000000' > sample3-1```
+
 ```cat SRR8797509.fastq | paste - - - - | awk 'NR>=3000001 && NR<=4000000' > sample4-1```
+
 ```cat SRR8797509.fastq | paste - - - - | awk 'NR>=4000001 && NR<=5000000' > sample5-1```
 
 ## 8- shuffeling the main fastq file containing the 5000000 reads
@@ -30,9 +34,13 @@
 
 ## 9- resampling the shuffeled file 
 ```cat SRR8797509_shuffeled.fastq | paste - - - - | awk 'NR>=1 && NR<=1000000' > sample1-2```
+
 ```cat SRR8797509_shuffeled.fastq | paste - - - - | awk 'NR>=1000001 && NR<=2000000' > sample2-2```
+
 ```cat SRR8797509_shuffeled.fastq | paste - - - - | awk 'NR>=2000001 && NR<=3000000' > sample3-2```
+
 ```cat SRR8797509_shuffeled.fastq | paste - - - - | awk 'NR>=3000001 && NR<=4000000' > sample4-2``` 
+
 ```cat SRR8797509_shuffeled.fastq | paste - - - - | awk 'NR>=4000001 && NR<=5000000' > sample5-2 ```
 
 
