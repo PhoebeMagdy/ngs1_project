@@ -42,8 +42,8 @@
 ## Checking the first sample before and after shuffling for quality control using FASTQC
 ## 1- Install the required tools for performing the quality control assessment
 ```javascript 
-   conda install -c bioconda fastqc
-   conda install -c bioconda multiqc
+   #conda install -c bioconda fastqc
+   #conda install -c bioconda multiqc
 ```
 
 ## 2- FastQC assessment for the first sample before shuffling
@@ -68,7 +68,7 @@ fastqc -t 1 -f fastq -noextract -o . $f;done
 # Data Trimming
 
 ## 1- Install the required tools for trimming data
-```conda install -c bioconda trimmomatic```
+```#conda install -c bioconda trimmomatic```
 
 ## 2- Mild trimming for the 5 unshuffled samples (5-forward && 5-reverse reads)
 
@@ -118,7 +118,7 @@ for SAMPLE in 1 2 3 4 5;
 ## 2- Indexing 
 
 ```javascript
-   mkdir ~/workdir/Assignment/bwa_align/bwaIndex && cd ~/workdir/Assignment/bwa_align/bwaIndex
+   mkdir -p ~/workdir/Assignment/bwa_align/bwaIndex && cd ~/workdir/Assignment/bwa_align/bwaIndex
    ln -s ~/workdir/sample_data/gencode.v29.pc_transcripts.chr22.simplified.fa .
    bwa index -a bwtsw gencode.v29.pc_transcripts.chr22.simplified.fa
 ```
@@ -163,18 +163,18 @@ done
 
 # Data Assembly 
 
-## Assembly for the files resulted from BWA alignment on unshuffled data
+## 1- Assembly for the files resulted from BWA alignment on unshuffled data
 
 ```cd ~/workdir/Assignment/bwa_align```
 
-## Prepare the SAM file for assembly
+## 2- Prepare the SAM file for assembly
 
 ```javascript
-install Samtools
-conda install samtools
+#install Samtools
+#conda install samtools
 ```
 
-## convert the SAM file into BAM file 
+## 3- convert the SAM file into BAM file 
 
 ```javascript
 samtools view -bS SRR8797509_part_001.sam > SRR8797509_part_001.bam
@@ -184,7 +184,7 @@ samtools view -bS SRR8797509_part_004.sam > SRR8797509_part_004.bam
 samtools view -bS SRR8797509_part_005.sam > SRR8797509_part_005.bam
 ``` 
 
-## convert the BAM file to a sorted BAM file. 
+## 4- convert the BAM file to a sorted BAM file. 
 
 ```javascript
 samtools sort SRR8797509_part_001.bam -o SRR8797509_part_001.sorted.bam
@@ -194,7 +194,7 @@ samtools sort SRR8797509_part_004.bam -o SRR8797509_part_004.sorted.bam
 samtools sort SRR8797509_part_005.bam -o SRR8797509_part_005.sorted.bam
 ```
 
-## Export some useful statistics report for each sample indvidually
+## 5- Export some useful statistics report for each sample indvidually
 
 ```javascript
 for f in 1 2 3 4 5;
@@ -203,10 +203,10 @@ for f in 1 2 3 4 5;
 done
 ```
 
-## install required tool for assembly 
+## 6- install required tool for assembly 
 ```install stringtie```
 
-## Assembly without known annotations
+## 7- Assembly without known annotations
 
 ```javascript
 for SAMPLE in 1 2 3 4 5;
@@ -216,7 +216,7 @@ for SAMPLE in 1 2 3 4 5;
 done
 ```
 
-# Assembly with known previous annotations
+# 8- Assembly with known previous annotations
 
 ```javascript
 for SAMPLE in 1 2 3 4 5;
@@ -225,11 +225,11 @@ for SAMPLE in 1 2 3 4 5;
 done
 ```
 
-## Assembly for the files resulted from Hisat alignment on shuffled data
+## 9- Assembly for the files resulted from Hisat alignment on shuffled data
 
 ```cd ~/workdir/Assignment/hisat_align```
 
-## convert the SAM file into BAM file 
+## 10- convert the SAM file into BAM file 
 ```javascript
 samtools view -bS shuff_SRR8797509_part_001.sam > shuff_SRR8797509_part_001.bam
 samtools view -bS shuff_SRR8797509_part_002.sam > shuff_SRR8797509_part_002.bam
@@ -238,7 +238,7 @@ samtools view -bS shuff_SRR8797509_part_004.sam > shuff_SRR8797509_part_004.bam
 samtools view -bS shuff_SRR8797509_part_005.sam > shuff_SRR8797509_part_005.bam
 ```
 
-## convert the BAM file to a sorted BAM file. 
+## 11- convert the BAM file to a sorted BAM file. 
 ```javascript
 samtools sort shuff_SRR8797509_part_001.bam -o shuff_SRR8797509_part_001.sorted.bam
 samtools sort shuff_SRR8797509_part_002.bam -o shuff_SRR8797509_part_002.sorted.bam
@@ -246,7 +246,7 @@ samtools sort shuff_SRR8797509_part_003.bam -o shuff_SRR8797509_part_003.sorted.
 samtools sort shuff_SRR8797509_part_004.bam -o shuff_SRR8797509_part_004.sorted.bam
 samtools sort shuff_SRR8797509_part_005.bam -o shuff_SRR8797509_part_005.sorted.bam
 ```
-## Export some useful statistics report for each sample indvidually
+## 12- Export some useful statistics report for each sample indvidually
 
 ```javascript
 for f in 1 2 3 4 5;
@@ -255,10 +255,10 @@ for f in 1 2 3 4 5;
 done
 ```
 
-## install required tool for assembly 
+## 13- install required tool for assembly 
 ```install stringtie```
 
-## Assembly without known annotations
+## 14 -Assembly without known annotations
 
 ```javascript
 for SAMPLE in 1 2 3 4 5;
@@ -268,7 +268,7 @@ for SAMPLE in 1 2 3 4 5;
 done
 ```
 
-# Assembly with known previous annotations
+# 15- Assembly with known previous annotations
 
 ```javascript
 for SAMPLE in 1 2 3 4 5;
@@ -279,7 +279,7 @@ done
 
 # Using GTF-Compare to Compare the Generated Annotation Files to a Reference Annotation.
 
-##Create virtual evironment with conda
+## 1- Create virtual evironment with conda
 
 ```javascript
 conda create -n ngs-gtf python=3.6 anaconda
@@ -290,7 +290,6 @@ pypy3 get-pip.py
 
 
 pypy3 -m pip install gffutils numpy tqdm 'intervaltree<3.0'
-
 
 mkdir -p ~/workdir/Assignment/gtf-compare/gtfs && cd ~/workdir/Assignment/gtf-compare/gtfs
 ln -s ~/workdir/Assignment/bwa_align/ref_sup_*.gtf .
@@ -312,11 +311,8 @@ done
 
 # Differential_expression
 
-```javascript
-mkdir -p ~/workdir/Assignment/Diff_exp && cd ~/workdir/Assignment/Diff_exp
-mkdir ~/workdir/Assignment/ngs1_project/out && cd ~/workdir/Assignment/ngs1_project/out|mv ~/workdir/Assignment/ngs1_project/main_reads/out/*.fastq out| mv ~/workdir/Assignment/ngs1_project/shuff_reads/out/*.fastq out
-```
-# Download Required Data 
+```mkdir -p ~/workdir/Assignment/Diff_exp && cd ~/workdir/Assignment/Diff_exp```
+# 1-Download Required Data 
 
 ```javascript
 #wget -c https://0x0.st/zK57.gz -O ref.tar.gz
@@ -325,7 +321,7 @@ mkdir ~/workdir/Assignment/ngs1_project/out && cd ~/workdir/Assignment/ngs1_proj
 #wget -c https://raw.githubusercontent.com/mr-eyes/nu-ngs01/master/Day-6/draw-heatmap.r
 ```
 
-# Setup enviornemnt
+# 2- Setup enviornemnt
 
 ```javascript
 #conda activate ngs1
@@ -333,35 +329,37 @@ mkdir ~/workdir/Assignment/ngs1_project/out && cd ~/workdir/Assignment/ngs1_proj
 # conda install samtools
 ```
 
-# Install subread, we will use featureCount : a software program developed for counting reads to genomic features such as genes, exons, promoters and genomic bins.
+# 3- Install subread, we will use featureCount : a software program developed for counting reads to genomic features such as genes, exons, promoters and genomic bins.
 
 ```conda install subread```
 
-# install r and dependicies
+# 4- install r and dependicies
 
 ```javascript
 #conda install r
-conda install -y bioconductor-deseq r-gplots
+#conda install -y bioconductor-deseq r-gplots
 RUNLOG=runlog.txt
 ```
 
-# Step 2 (Quantification)Step 
+# 5- Step 2 (Quantification)Step 
 
 ```GTF=~/workdir/sample_data/chr22_with_ERCC92.gtf```
 
-# Generate the counts.
+# 6- Generate the counts.
 
-```featureCounts -a $GTF -g gene_name -o counts.txt  ~/workdir/Assignment/bwa_align/SRR8797509_part_00*.bam  ~/workdir/Assignment/hisat_align/shuff_SRR8797509_part_00*.bam```
+```javascript
+featureCounts -a $GTF -g gene_name -o counts.txt  ~/workdir/Assignment/bwa_align/SRR8797509_part_00*.bam  ~/workdir/Assignment/hisat_align/shuff_SRR8797509_part_00*.bam
+```
 
-# Simplify the file to keep only the count columns.
+# 7- Simplify the file to keep only the count columns.
 
 ```cat counts.txt | cut -f 1,7-12 > simple_counts.txt```
 
-# Analyze the counts with DESeq1.
+# 8- Analyze the counts with DESeq1.
 
 ```cat simple_counts.txt | Rscript deseq1.r 5x5 > results_deseq1.tsv```
 
-# View only rows with pval < 0.05
+# 9- View only rows with pval < 0.05
 
 ```javascript
 cat results_deseq1.tsv | awk ' $8 < 0.05 { print $0 }' > filtered_results_deseq1.tsv
